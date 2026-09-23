@@ -1,2 +1,27 @@
-import { CmsSidebar } from '../../components/CmsSidebar'; import { SiteHeader } from '../../components/SiteHeader'; import { StatusPill } from '../../components/StatusPill'; import { useCms } from '../../context/CmsContext';
-export default function CmsDashboardPage(){const {leadership,verification,setWorkflow}=useCms(); const missing=verification.filter(x=>x.status==='Missing').length, needs=verification.filter(x=>x.status==='Needs Verification').length; return <div className="admin"><CmsSidebar/><main className="admin-main"><SiteHeader admin/><p className="eyebrow">Overview</p><h1>Content readiness</h1><section className="admin-stats"><article><strong>{missing}</strong><span>Missing information</span></article><article><strong>{needs}</strong><span>Needs verification</span></article><article><strong>0</strong><span>Missing Arabic translations approved for publication</span></article><article><strong>0</strong><span>Published news</span></article></section><section className="warning"><b>Official CEO biography and portrait pending.</b><p>Keep the public leadership card elegant and complete through its neutral placeholder. Do not generate or infer a biography.</p></section><section className="cms-section"><div><p className="eyebrow">Leadership</p><h2>Current approved records</h2></div>{leadership.map(x=><article className="cms-row" key={x.id}><div><h3>{x.fullNameEN}</h3><p>{x.positionEN} · {x.country}</p><small>{x.note}</small></div><div><StatusPill>{x.workflow}</StatusPill><select value={x.workflow} onChange={e=>setWorkflow(x.id,e.target.value as any)}><option>Draft</option><option>Needs Verification</option><option>Approved</option><option>Published</option><option>Archived</option></select></div></article>)}</section><section className="cms-section"><p className="eyebrow">Website content</p><h2>Public content rule</h2><p>Only records marked <b>Approved</b> or <b>Published</b> can be projected to the public homepage. Management confirmation and a source are checked separately.</p></section></main></div>}
+import { CmsSidebar } from '../../components/CmsSidebar';
+import { SiteHeader } from '../../components/SiteHeader';
+import { useCms } from '../../context/CmsContext';
+
+export default function CmsDashboardPage(){
+  const {leadership}=useCms();
+  return <div className="admin">
+    <CmsSidebar/>
+    <main className="admin-main">
+      <SiteHeader admin/>
+      <p className="eyebrow">Overview</p>
+      <h1>Content dashboard</h1>
+      <p className="lead">Manage the public website content from one simple workspace.</p>
+      <section className="admin-stats">
+        <article><strong>5</strong><span>Website pages</span></article>
+        <article><strong>{leadership.length}</strong><span>Leadership records</span></article>
+        <article><strong>1</strong><span>Media Center</span></article>
+        <article><strong>1</strong><span>Contact page</span></article>
+      </section>
+      <section className="cms-section">
+        <p className="eyebrow">Quick explanation</p>
+        <h2>Manage the content people see</h2>
+        <p>Use Website content to edit page text and sections, Board &amp; leadership to manage people, Media Center to manage published items, Contact Us to manage contact details, and Brand &amp; global settings for the shared website identity.</p>
+      </section>
+    </main>
+  </div>
+}
