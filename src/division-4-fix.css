@@ -1,0 +1,3 @@
+/* Division 4 visual corrections: locale-stable hero fallback and complete media category controls. */
+.media-filter button{min-width:72px}.media-filter button:first-child{padding-left:1.35rem}
+@media(max-width:520px){.media-filter button:first-child{padding-left:1rem}}

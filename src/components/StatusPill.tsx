@@ -1,0 +1,1 @@
+export function StatusPill({children}:{children:string}){const cls=children==='Approved'||children==='Published'?'green':children==='Missing'?'red':children==='Historical / Archived'||children==='Archived'?'gray':'amber'; return <span className={`status ${cls}`}>{children}</span>}

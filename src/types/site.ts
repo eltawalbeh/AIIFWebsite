@@ -1,0 +1,9 @@
+export type Language = 'en' | 'ar';
+export type PageSlug = 'home' | 'about-us' | 'board' | 'media-center' | 'contact-us';
+export type AdminRole = 'super_admin' | 'content_admin';
+export type PublishStatus = 'draft' | 'approved' | 'published' | 'archived';
+export type Localized = { en: string; ar: string };
+export type MediaType = 'news' | 'press_release' | 'award' | 'publication';
+export type CmsPage = { slug:PageSlug; title:Localized; seoTitle:Localized; seoDescription:Localized; status:PublishStatus };
+export type CmsSection = { id:string; pageSlug:PageSlug; key:string; title:Localized; body:Localized; image?:string; order:number; status:PublishStatus };
+export type MediaItem = { id:string; type:MediaType; title:Localized; excerpt:Localized; article:Localized; date?:string; image?:string; featured:boolean; status:PublishStatus };

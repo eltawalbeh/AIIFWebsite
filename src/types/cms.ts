@@ -1,0 +1,5 @@
+export type Workflow = 'Draft' | 'Needs Verification' | 'Approved' | 'Published' | 'Archived';
+export type Lifecycle = 'Current' | 'Historical' | 'Unknown';
+export type LeadershipRole = 'chairman' | 'ceo' | 'board_member' | 'historical';
+export type LeadershipRecord = { id:string; fullNameEN:string; fullNameAR:string; honorific:string; positionEN:string; positionAR:string; country:string; photo?:string; shortBioEN?:string; shortBioAR?:string; fullBioEN?:string; fullBioAR?:string; linkedin?:string; order:number; homepageVisible:boolean; lifecycle:Lifecycle; workflow:Workflow; verification:string; note?:string; leadershipRole:LeadershipRole };
+export type VerificationItem = { id:string; item:string; value:string; source:string; sourceDate:string; lifecycle:Lifecycle; status:'Approved'|'Needs Verification'|'Missing'|'Historical / Archived'; note:string };

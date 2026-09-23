@@ -1,0 +1,10 @@
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { SiteHeader } from '../../components/SiteHeader';
+import { SiteFooter } from '../../components/SiteFooter';
+import { pageSeed, sectionSeed } from '../../lib/site-map';
+import { useLocale } from '../../context/LocaleContext';
+import { getPublicPage } from '../../lib/cms-api';
+
+const pathToSlug:Record<string, any>={'about-us':'about-us',board:'board','media-center':'media-center','contact-us':'contact-us'};
+export default function ContentPage(){const {page='about-us'}=useParams(); const {language,text}=useLocale();const slug=pathToSlug[page]||'about-us'; const [cms,setCms]=useState<any>(null);useEffect(()=>{setCms(null);void getPublicPage(slug).then(setCms)},[slug]);const record=pageSeed.find(x=>x.slug===slug)!; const sections=cms?.sections?.length?cms.sections.map((s:any)=>({id:s.id,key:s.section_key,title:{en:s.title_en,ar:s.title_ar},body:{en:s.body_en,ar:s.body_ar}})):sectionSeed.filter(x=>x.pageSlug===slug); const isMedia=slug==='media-center'; const pick=(item:{en:string;ar:string})=>item[language];const title=cms?{en:cms.page.title_en,ar:cms.page.title_ar}:record.title;const desc=cms?{en:cms.page.seo_description_en,ar:cms.page.seo_description_ar}:record.seoDescription; return <main><SiteHeader/><section className="page-hero"><p className="eyebrow">{language==='ar'?'المنتدى العربي الدولي للمستثمرين':'Arab International Investor Forum'}</p><h1>{pick(title)}</h1><p>{pick(desc)}</p></section><section className="content-page">{sections.map((s:any)=><article className="content-section" key={s.id}><p className="eyebrow">{s.key}</p><h2>{pick(s.title)}</h2><p className="lead">{pick(s.body)}</p></article>)}{isMedia&&<div className="media-categories"><Link to="/media-center/news">{text('News','الأخبار')}</Link><Link to="/media-center/press">{text('Press releases','البيانات الصحفية')}</Link><Link to="/media-center/awards">{text('Awards','الجوائز')}</Link><Link to="/media-center/publications">{text('Publications','المنشورات')}</Link></div>}</section><SiteFooter/></main>}

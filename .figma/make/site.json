@@ -1,0 +1,15 @@
+{
+  "title": "AIIF | Arab International Investor Forum",
+  "description": "AIIF connects investors, institutions, innovators, and research communities to advance sustainable investment across the Arab region and beyond.",
+  "language": "en",
+  "icons": {
+    "icon": "/.figma/make/favicon.png"
+  },
+  "openGraph": {
+    "image": "/.figma/make/social-image.png"
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": true
+  }
+}
